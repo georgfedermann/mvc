@@ -84,6 +84,49 @@
                         <contextPath>/mvc</contextPath>
                     </webApp>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>1.2.17</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <version>1.7.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <!-- makes jetty log the exception if it fails to initialize slf4j -->
+                                <property>
+                                    <name>org.eclipse.jetty.util.log.IGNORED</name>
+                                    <value>true</value>
+                                </property>
+                                <!-- this tells where the log4j configuration is -->
+                                <property>
+                                    <name>log4j.configuration</name>
+                                    <value>file:./src/main/resources/log4j.properties</value>
+                                </property>
+                                <!-- log log4j itself, e.g. how it locates log4j.properties, etc. -->
+                                <property>
+                                    <name>log4j.debug</name>
+                                    <value></value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
