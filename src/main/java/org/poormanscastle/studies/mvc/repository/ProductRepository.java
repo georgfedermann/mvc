@@ -1,8 +1,8 @@
 package org.poormanscastle.studies.mvc.repository;
 
-import org.poormanscastle.studies.mvc.domain.Product;
-
 import java.util.List;
+
+import org.poormanscastle.studies.mvc.domain.Product;
 
 /**
  * Created by georg on 26.11.15.
@@ -10,5 +10,7 @@ import java.util.List;
 public interface ProductRepository {
 
     List<Product> getAllProducts();
+
+    Product getProductById(String productId);
 
 }

@@ -1,12 +1,13 @@
 package org.poormanscastle.studies.mvc.repository.impl;
 
-import org.poormanscastle.studies.mvc.domain.Product;
-import org.poormanscastle.studies.mvc.repository.ProductRepository;
-import org.springframework.stereotype.Repository;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.poormanscastle.studies.mvc.domain.Product;
+import org.poormanscastle.studies.mvc.repository.ProductRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by georg on 26.11.15.
@@ -43,5 +44,15 @@ public class InMemoryProductRepository implements ProductRepository {
     @Override
     public List<Product> getAllProducts() {
         return listOfProducts;
+    }
+
+    @Override
+    public Product getProductById(String productId) {
+        for (Product product : listOfProducts) {
+            if (product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
+                return product;
+            }
+        }
+        throw new IllegalArgumentException(StringUtils.join("No products found for the product id: ", productId));
     }
 }
