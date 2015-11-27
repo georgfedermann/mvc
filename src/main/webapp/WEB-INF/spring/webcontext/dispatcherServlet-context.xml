@@ -3,7 +3,8 @@
 
     <mvc:annotation-driven />
     <context:component-scan base-package="org.poormanscastle.studies.mvc.controller,
-        org.poormanscastle.studies.mvc.repository" />
+        org.poormanscastle.studies.mvc.repository,
+        org.poormanscastle.studies.mvc.service" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
