@@ -55,4 +55,15 @@ public class InMemoryProductRepository implements ProductRepository {
         }
         throw new IllegalArgumentException(StringUtils.join("No products found for the product id: ", productId));
     }
+
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : listOfProducts) {
+            if (category.equalsIgnoreCase(product.getCategory())) {
+                result.add(product);
+            }
+        }
+        return result;
+    }
 }

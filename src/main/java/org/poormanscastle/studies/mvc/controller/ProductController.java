@@ -4,6 +4,7 @@ import org.poormanscastle.studies.mvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,6 +17,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    // not specifiyng a request mapping pattern makes this method the default request handler for this controller.
     @RequestMapping
     public String list(Model model) {
         model.addAttribute("products", productService.getAllProducts());
@@ -23,8 +25,14 @@ public class ProductController {
     }
 
     @RequestMapping("/all")
-    public String allProducts(Model model){
+    public String allProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
+        return "products";
+    }
+
+    @RequestMapping("/{category}")
+    public String getProductsByCategory(Model model, @PathVariable("category") String category) {
+        model.addAttribute("products", productService.getProductsByCategory(category));
         return "products";
     }
 
