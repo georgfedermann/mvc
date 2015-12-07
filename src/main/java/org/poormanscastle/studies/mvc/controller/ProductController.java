@@ -10,13 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by georg on 25.11.15.
  */
 @Controller
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/products")
+    @RequestMapping
     public String list(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "products";
+    }
+
+    @RequestMapping("/all")
+    public String allProducts(Model model){
         model.addAttribute("products", productService.getAllProducts());
         return "products";
     }
