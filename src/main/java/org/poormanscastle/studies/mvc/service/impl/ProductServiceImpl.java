@@ -1,6 +1,8 @@
 package org.poormanscastle.studies.mvc.service.impl;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.poormanscastle.studies.mvc.domain.Product;
 import org.poormanscastle.studies.mvc.repository.ProductRepository;
@@ -26,4 +28,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByCategory(String category) {
         return productRepository.getProductsByCategory(category);
     }
+
+    @Override
+    public Set<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
+        return productRepository.getProductsByFilter(filterParams);
+    }
+
 }

@@ -4,8 +4,12 @@ import org.poormanscastle.studies.mvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by georg on 25.11.15.
@@ -33,6 +37,12 @@ public class ProductController {
     @RequestMapping("/{category}")
     public String getProductsByCategory(Model model, @PathVariable("category") String category) {
         model.addAttribute("products", productService.getProductsByCategory(category));
+        return "products";
+    }
+
+    @RequestMapping("/filter/{ByCriteria}")
+    public String getProductsByFilter(@MatrixVariable(pathVar = "ByCriteria") Map<String, List<String>> filterParams, Model model) {
+        model.addAttribute("products", productService.getProductsByFilter(filterParams));
         return "products";
     }
 
