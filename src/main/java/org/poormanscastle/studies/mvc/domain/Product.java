@@ -26,6 +26,8 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+    public Product(){}
+
     @Override
     public int hashCode() {
         return 31 + productId == null ? 0 : productId.hashCode();
