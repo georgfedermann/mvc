@@ -3,6 +3,8 @@ package org.poormanscastle.studies.mvc.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.poormanscastle.studies.mvc.domain.Product;
 import org.poormanscastle.studies.mvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +69,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result) {
+    public String processAddNewProductForm(@ModelAttribute("newProduct") @Valid Product newProduct, BindingResult result) {
+        if(result.hasErrors()){
+            return "addProduct";
+        }
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {
             throw new RuntimeException(org.apache.commons.lang3.StringUtils.join("Attempting to bind disallowed fields: ",

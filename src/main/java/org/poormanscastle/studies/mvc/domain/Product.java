@@ -1,17 +1,27 @@
 package org.poormanscastle.studies.mvc.domain;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.math.BigDecimal;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by georg on 25.11.15.
  */
 public class Product {
 
-    
+    @Pattern(regexp = "P[0-9]+", message = "{Pattern.Product.productId.validation}")
     private String productId;
+    @Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
     private String name;
+    @Min(value = 0, message = "{Min.Product.unitPrice.validation}")
+    @Digits(integer = 8, fraction = 2, message = "{Digits.Product.unitPrice.validation}")
+    @NotNull(message = "{NotNull.Product.unitPrice.validation}")
     private BigDecimal unitPrice;
     private String description;
     private String manufacturer;
@@ -27,7 +37,8 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public Product(){}
+    public Product() {
+    }
 
     @Override
     public int hashCode() {
@@ -36,21 +47,21 @@ public class Product {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
-        if(obj == null){
+        if (obj == null) {
             return false;
         }
-        if(getClass() != obj.getClass()){
+        if (getClass() != obj.getClass()) {
             return false;
         }
         Product other = (Product) obj;
-        if(productId == null){
-            if(other.productId!=null){
+        if (productId == null) {
+            if (other.productId != null) {
                 return false;
             }
-        } else if (!productId.equals(other.productId)){
+        } else if (!productId.equals(other.productId)) {
             return false;
         }
         return true;
